@@ -6,15 +6,11 @@ def get_consul_key(
     key: str,
     host: str = '127.0.0.1',
     port: int = 8500,
-    token: str = None,
-    consul_instance=None,
+    token: str = None
 ) -> str:
     import consul
 
-    if consul_instance:
-        c = consul_instance
-    else:
-        c = consul.Consul(host=host, port=port, token=token)
+    c = consul.Consul(host=host, port=port, token=token)
 
     index, data = c.kv.get(key=key)
     key_value = data.get('Value').decode()
