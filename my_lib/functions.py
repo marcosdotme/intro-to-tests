@@ -1,21 +1,19 @@
-def fahrenheit_to_celsius(f):
+def fahrenheit_to_celsius(f: int | float) -> float:
     return (5 * (f - 32)) / 9
 
 
 def get_consul_key(
     key: str,
-    host='127.0.0.1',
-    port=8500,
-    token=None,
+    host: str = '127.0.0.1',
+    port: int = 8500,
+    token: str = None,
     consul_instance=None,
-):
+) -> str:
     import consul
 
     if consul_instance:
-        print('is using mocked')
         c = consul_instance
     else:
-        print('is not using mocked')
         c = consul.Consul(host=host, port=port, token=token)
 
     index, data = c.kv.get(key=key)
